@@ -1,5 +1,6 @@
 import "./App.css";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
+import { FaRegTrashAlt } from "react-icons/fa";
 
 export default function App() {
   const [tasks, setTasks] = useState("");
@@ -19,6 +20,16 @@ export default function App() {
 
       alert("Task added to the list");
     }
+  }
+
+  function deleteTask(task: string) {
+    const taskToRemove = task;
+
+    const filteredList = list.filter((listTasks) => listTasks != taskToRemove);
+
+    alert(`Removed task ${task}`);
+
+    setList(filteredList);
   }
 
   return (
@@ -47,26 +58,33 @@ export default function App() {
                 Add
               </button>
             </div>
-            <div className="w-full h-full p-4 rounded items-center justify-center">
-              <ul>
-                {list.map((item, index) => (
-                  <li
-                    key={index}
-                    className="bg-gray-300 w-full h-full p-2 rounded flex items-center mb-2 justify-between"
-                  >
-                    <span className="font-bold ml-2 text-2xl">{item}</span>
-                    <div className="">
-                      <input
-                        type="checkbox"
-                        className="h-8 w-8 border border-rounded-2xl m-2"
-                        name="checking"
-                      />
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
           </form>
+          <div className="w-full h-full p-4 rounded items-center justify-center">
+            <ul>
+              {list.map((task, index) => (
+                <li
+                  key={index}
+                  className="bg-gray-300 w-full h-full p-2 rounded flex items-center mb-2 justify-between"
+                >
+                  <span className="font-bold ml-2 text-2xl">{task}</span>
+                  <div className="flex">
+                    <input
+                      type="checkbox"
+                      className="h-8 w-8 border border-rounded-2xl m-2"
+                      name="checking"
+                    />
+                    <button
+                      onClick={() => {
+                        deleteTask(task);
+                      }}
+                    >
+                      <FaRegTrashAlt className="h-8 w-8 m-2 text-red-500 hover:opacity-50" />
+                    </button>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </div>
