@@ -4,7 +4,28 @@ import { FaRegTrashAlt } from "react-icons/fa";
 
 export default function App() {
   const [tasks, setTasks] = useState("");
-  const [list, setList] = useState<string[]>([]);
+  const [list, setList] = useState<string[]>(
+    localStorage.getItem("list")
+      ? JSON.parse(localStorage.getItem("list")!)
+      : []
+  );
+  const [completed, setCompleted] = useState<string[]>(
+    localStorage.getItem("completed")
+      ? JSON.parse(localStorage.getItem("completed")!)
+      : []
+  );
+
+  useEffect(() => {
+    localStorage.setItem("list", JSON.stringify(list));
+    localStorage.setItem("completed", JSON.stringify(completed));
+  }, [list, completed]);
+
+  useEffect(() => {
+    const storedList = localStorage.getItem("tasksList");
+    if (storedList) {
+      setList(JSON.parse(storedList));
+    }
+  }, []);
 
   function sumbitNewTask(event: FormEvent) {
     event.preventDefault();
@@ -14,6 +35,7 @@ export default function App() {
     } else {
       setList((list) => [...list, tasks]);
 
+      localStorage.setItem("list", JSON.stringify([...list, tasks]));
       console.log(list);
 
       setTasks("");
@@ -30,6 +52,10 @@ export default function App() {
     alert(`Removed task ${task}`);
 
     setList(filteredList);
+
+    setList(filteredList);
+
+    localStorage.setItem("list", JSON.stringify(filteredList));
   }
 
   return (
@@ -64,7 +90,9 @@ export default function App() {
               {list.map((task, index) => (
                 <li
                   key={index}
-                  className="bg-gray-300 w-full h-full p-2 rounded flex items-center mb-2 justify-between"
+                  className={`bg-gray-300 w-full h-full p-2 rounded flex items-center mb-2 justify-between ${
+                    completed.includes(task) ? "line-through" : ""
+                  }`}
                 >
                   <span className="font-bold ml-2 text-2xl">{task}</span>
                   <div className="flex">
@@ -72,6 +100,18 @@ export default function App() {
                       type="checkbox"
                       className="h-8 w-8 border border-rounded-2xl m-2"
                       name="checking"
+                      checked={completed.includes(task)}
+                      onChange={(e) => {
+                        if (e.target.checked) {
+                          setCompleted((completed) => [...completed, task]);
+                        } else {
+                          setCompleted((completed) =>
+                            completed.filter(
+                              (completedTask) => completedTask !== task
+                            )
+                          );
+                        }
+                      }}
                     />
                     <button
                       onClick={() => {
