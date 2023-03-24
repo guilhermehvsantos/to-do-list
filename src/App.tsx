@@ -1,24 +1,12 @@
 import "./App.css";
 import { FormEvent, useEffect, useState } from "react";
 import { FaRegTrashAlt } from "react-icons/fa";
+import { useLocalStorage } from "react-use";
 
 export default function App() {
   const [tasks, setTasks] = useState("");
-  const [list, setList] = useState<string[]>(
-    localStorage.getItem("list")
-      ? JSON.parse(localStorage.getItem("list")!)
-      : []
-  );
-  const [completed, setCompleted] = useState<string[]>(
-    localStorage.getItem("completed")
-      ? JSON.parse(localStorage.getItem("completed")!)
-      : []
-  );
-
-  useEffect(() => {
-    localStorage.setItem("list", JSON.stringify(list));
-    localStorage.setItem("completed", JSON.stringify(completed));
-  }, [list, completed]);
+  const [list, setList] = useLocalStorage<string[]>("list", []);
+  const [completed, setCompleted] = useLocalStorage<string[]>("completed", []);
 
   useEffect(() => {
     const storedList = localStorage.getItem("tasksList");
@@ -35,9 +23,6 @@ export default function App() {
     } else {
       setList((list) => [...list, tasks]);
 
-      localStorage.setItem("list", JSON.stringify([...list, tasks]));
-      console.log(list);
-
       setTasks("");
 
       alert("Task added to the list");
@@ -47,15 +32,11 @@ export default function App() {
   function deleteTask(task: string) {
     const taskToRemove = task;
 
-    const filteredList = list.filter((listTasks) => listTasks != taskToRemove);
+    const filteredList = list?.filter((listTasks) => listTasks != taskToRemove);
 
     alert(`Removed task ${task}`);
 
     setList(filteredList);
-
-    setList(filteredList);
-
-    localStorage.setItem("list", JSON.stringify(filteredList));
   }
 
   return (
@@ -87,11 +68,11 @@ export default function App() {
           </form>
           <div className="w-full h-full p-4 rounded items-center justify-center">
             <ul>
-              {list.map((task, index) => (
+              {list?.map((task, index) => (
                 <li
                   key={index}
                   className={`bg-gray-300 w-full h-full p-2 rounded flex items-center mb-2 justify-between ${
-                    completed.includes(task) ? "line-through" : ""
+                    completed?.includes(task) ? "line-through" : ""
                   }`}
                 >
                   <span className="font-bold ml-2 text-2xl">{task}</span>
@@ -100,13 +81,13 @@ export default function App() {
                       type="checkbox"
                       className="h-8 w-8 border border-rounded-2xl m-2"
                       name="checking"
-                      checked={completed.includes(task)}
+                      checked={completed?.includes(task)}
                       onChange={(e) => {
                         if (e.target.checked) {
                           setCompleted((completed) => [...completed, task]);
                         } else {
                           setCompleted((completed) =>
-                            completed.filter(
+                            completed?.filter(
                               (completedTask) => completedTask !== task
                             )
                           );
