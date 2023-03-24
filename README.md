@@ -26,10 +26,9 @@ https://guilhermehvsantos.github.io/to-do-list/
 
 
 
-
 ## Aprendizados
 
-Coloquei em prática o que vinha aprendendo em cursos e eventos, pois com a prática de projetos próprios é possivel se deparar com situações inesperadas das quais não estamos preparados, por mais simples que seja com as stacks utilizadas tive que buscar na documentação alguns detalhes que surgiram durante o desenvolvimento, assim como o deploy no github de uma projeto em react. 
+Coloquei em prática o que vinha aprendendo em cursos e eventos, pois com a prática de projetos próprios é possivel se deparar com situações inesperadas das quais não estamos preparados, por mais simples que seja com as stacks utilizadas tive que buscar na documentação alguns detalhes que surgiram durante o desenvolvimento, assim como o deploy no github pages de um projeto em react. 
 
 
 ## Autores
