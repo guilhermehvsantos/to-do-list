@@ -1,4 +1,8 @@
 
+# Disclaimer ⚠️
+
+Após algumas modificações o projeto apresenta alguns bugs em relação ao estado por isso aceito dicas e sugestões!
+
 # To-do list ✔️
 
 Aplicação web de uma lista de afazeres, pequeno projeto pessoal desenvolvido do total zero. 
