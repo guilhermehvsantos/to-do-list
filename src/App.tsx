@@ -21,7 +21,7 @@ export default function App() {
       alert("You need to enter some task!");
       setTasks("");
     } else {
-      setList((list) => [...list, tasks]);
+      setList((list) => [...(list as []), tasks]);
 
       setTasks("");
 
@@ -84,7 +84,10 @@ export default function App() {
                       checked={completed?.includes(task)}
                       onChange={(e) => {
                         if (e.target.checked) {
-                          setCompleted((completed) => [...completed, task]);
+                          setCompleted((completed) => [
+                            ...(completed as []),
+                            task,
+                          ]);
                         } else {
                           setCompleted((completed) =>
                             completed?.filter(
