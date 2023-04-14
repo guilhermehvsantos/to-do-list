@@ -1,15 +1,19 @@
 
-# To-do list
+# Disclaimer ⚠️
+
+Após algumas modificações o projeto apresenta alguns bugs em relação ao estado por isso aceito dicas e sugestões!
+
+# To-do list ✔️
 
 Aplicação web de uma lista de afazeres, pequeno projeto pessoal desenvolvido do total zero. 
 
 
-## Demonstração
+## Demonstração 🧪
 
 Aqui está o link da aplicação no github para teste.
 
 https://guilhermehvsantos.github.io/to-do-list/
-## Funcionalidades
+## Funcionalidades ⚒️
 
 - Adicionar tarefas
 - Marca-las como feitas
@@ -17,7 +21,7 @@ https://guilhermehvsantos.github.io/to-do-list/
 - Armazena-las no localstorage
 
 
-## Stacks utilizada
+## Stacks utilizada 📚
 
 - React
 - Vite
@@ -26,13 +30,12 @@ https://guilhermehvsantos.github.io/to-do-list/
 
 
 
+## Aprendizados ✍️
 
-## Aprendizados
-
-Coloquei em prática o que vinha aprendendo em cursos e eventos, pois com a prática de projetos próprios é possivel se deparar com situações inesperadas das quais não estamos preparados, por mais simples que seja com as stacks utilizadas tive que buscar na documentação alguns detalhes que surgiram durante o desenvolvimento, assim como o deploy no github de uma projeto em react. 
+Coloquei em prática o que vinha aprendendo em cursos e eventos, pois com a prática de projetos próprios é possivel se deparar com situações inesperadas das quais não estamos preparados, por mais simples que seja com as stacks utilizadas tive que buscar na documentação alguns detalhes que surgiram durante o desenvolvimento, assim como o deploy no github pages de um projeto em React. 
 
 
-## Autores
+## Autores 🖳
 
 - [@guilhermehvsantos](https://github.com/guilhermehvsantos)
 
