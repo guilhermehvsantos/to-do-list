@@ -1,19 +1,10 @@
 import "./App.css";
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useState } from "react";
 import { FaRegTrashAlt } from "react-icons/fa";
-import { useLocalStorage } from "react-use";
 
 export default function App() {
   const [tasks, setTasks] = useState("");
-  const [list, setList] = useLocalStorage<string[]>("list", []);
-  const [completed, setCompleted] = useLocalStorage<string[]>("completed", []);
-
-  useEffect(() => {
-    const storedList = localStorage.getItem("tasksList");
-    if (storedList) {
-      setList(JSON.parse(storedList));
-    }
-  }, []);
+  const [list, setList] = useState<string[]>([]);
 
   function sumbitNewTask(event: FormEvent) {
     event.preventDefault();
@@ -32,7 +23,7 @@ export default function App() {
   function deleteTask(task: string) {
     const taskToRemove = task;
 
-    const filteredList = list?.filter((listTasks) => listTasks != taskToRemove);
+    const filteredList = list.filter((listTasks) => listTasks != taskToRemove);
 
     alert(`Removed task ${task}`);
 
@@ -68,12 +59,10 @@ export default function App() {
           </form>
           <div className="w-full h-full p-4 rounded items-center justify-center">
             <ul>
-              {list?.map((task, index) => (
+              {list.map((task, index) => (
                 <li
                   key={index}
-                  className={`bg-gray-300 w-full h-full p-2 rounded flex items-center mb-2 justify-between ${
-                    completed?.includes(task) ? "line-through" : ""
-                  }`}
+                  className="bg-gray-300 w-full h-full p-2 rounded flex items-center mb-2 justify-between"
                 >
                   <span className="font-bold ml-2 text-2xl">{task}</span>
                   <div className="flex">
@@ -81,21 +70,6 @@ export default function App() {
                       type="checkbox"
                       className="h-8 w-8 border border-rounded-2xl m-2"
                       name="checking"
-                      checked={completed?.includes(task)}
-                      onChange={(e) => {
-                        if (e.target.checked) {
-                          setCompleted((completed) => [
-                            ...(completed as []),
-                            task,
-                          ]);
-                        } else {
-                          setCompleted((completed) =>
-                            completed?.filter(
-                              (completedTask) => completedTask !== task
-                            )
-                          );
-                        }
-                      }}
                     />
                     <button
                       onClick={() => {
